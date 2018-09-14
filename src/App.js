@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import NoteSequence from './NoteSequence'
+import SequenceContainer from './SequenceContainer'
+
 class App extends Component {
   render () {
     return (
       <div>
-        <NoteSequence />
+        <SequenceContainer />
       </div>
     )
   }

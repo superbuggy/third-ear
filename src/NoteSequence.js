@@ -6,6 +6,7 @@ class NoteSequence extends Component {
   constructor (props) {
     super(props)
     const notes = this.shuffleArray(Scale.notes('C major'))
+    console.log(notes.constructor)
     this.state = {
       notes,
       synth: new Tone.DuoSynth().toMaster(),
