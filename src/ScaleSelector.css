@@ -1,0 +1,13 @@
+div.matches {
+  max-height: 30vh;
+  max-width: 15em;
+  padding: .5em;
+  overflow-y: scroll;
+  background: lightgrey;
+
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dictionary } from 'tonal'
 import Fuse from 'fuse.js'
-
+import './ScaleSelector.css'
 export default class ScaleSelector extends Component {
   state = {
     searchText: null,
@@ -45,7 +45,9 @@ export default class ScaleSelector extends Component {
           name='scale'
           onChange={this.handleType}
         />
-        {matches}
+        <div className='matches'>
+          {matches}
+        </div>
       </div>
     )
   }
