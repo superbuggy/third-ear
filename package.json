@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "dotenv": "^6.0.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
     "react-scripts": "1.1.4",
     "tonal": "^2.0.0",
     "tone": "^0.12.80"
