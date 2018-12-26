@@ -5,14 +5,17 @@ import Tone from 'tone'
 class NoteSequence extends Component {
   constructor (props) {
     super(props)
-    const notes = this.shuffleArray(Scale.notes('C major'))
-    console.log(notes.constructor)
+    const notes = this.notesFromScale(this.props.scale)
     this.state = {
       notes,
       synth: new Tone.DuoSynth().toMaster(),
       transport: Tone.Transport,
       sequence: this.newSequence(notes)
     }
+  }
+
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (nextProps.scale !== this.props.scale) {}
   }
 
   shuffleArray (array) { // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -24,9 +27,8 @@ class NoteSequence extends Component {
     return newArray
   }
 
-  generateSequence (length) {
-    return Array.from(Array(length).keys())
-      .map(_ => 'C1')
+  notesFromScale (scale) {
+    const notes = this.shuffleArray(Scale.notes(this.props.scale))
   }
 
   setSequence () {
@@ -41,7 +43,6 @@ class NoteSequence extends Component {
   }
 
   playNote = (time, note) => {
-    console.log(note + 4)
     this.state.synth.triggerAttackRelease(note + 4, '4n')
   }
 
@@ -50,8 +51,13 @@ class NoteSequence extends Component {
     this.state.sequence.start(0.5)
   }
 
+  stopPlayback () {
+    this.state.transport.stop()
+    this.state.sequence.stop()
+  }
+
   render () {
-    console.log(this.state.notes)
+    this.stopPlayback()
     this.startPlayback()
 
     return (

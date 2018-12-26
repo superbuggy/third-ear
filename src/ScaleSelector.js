@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Dictionary } from 'tonal'
+import { Scale } from 'tonal'
 import Fuse from 'fuse.js'
 import './ScaleSelector.css'
 export default class ScaleSelector extends Component {
@@ -8,7 +9,7 @@ export default class ScaleSelector extends Component {
     matches: []
   }
 
-  scales = Dictionary.scale.names()
+  scales = Scale.names()
 
   handleType = event => {
     event.persist()
@@ -30,13 +31,22 @@ export default class ScaleSelector extends Component {
     const matches = new Fuse(this.scales, options)
       .search(this.state.searchText)
       .map(index => this.scales[index])
-    console.log(matches)
     this.setState(_ => ({ matches }))
+  }
+
+  selectScale = event => {
+    event.persist()
+    this.props.changeScale(event.target.innerText)
   }
 
   render () {
     const matches = this.state.matches.map(scale => (
-      <p> {scale} </p>
+      <p
+        className={'option'}
+        onClick={this.selectScale}
+      >
+        {scale}
+      </p>
     ))
     return (
       <div>
@@ -44,8 +54,13 @@ export default class ScaleSelector extends Component {
           type='text'
           name='scale'
           onChange={this.handleType}
+          placeholder='Search for a scale...'
         />
-        <div className='matches'>
+        <div
+          className='matches'
+          style={
+            {display: this.state.matches.length ? 'block' : 'none'}}
+        >
           {matches}
         </div>
       </div>
